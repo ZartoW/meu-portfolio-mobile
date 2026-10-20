@@ -1,0 +1,49 @@
+{
+  "perfil": {
+    "nome": "Zarto",
+    "titulo": "Estudante de Sistemas para Internet",
+    "instituicao": "UNICAP",
+    "periodo": "4º período",
+    "sobre": "Estudante interessado em desenvolvimento back-end, bancos de dados e aplicações full-stack.",
+    "tecnologias": [
+      "Java",
+      "Spring Boot",
+      "SQL",
+      "React",
+      "Node.js",
+      "HTML",
+      "JavaScript",
+      "React Native",
+      "Expo"
+    ]
+  },
+  "formacao": [
+    {
+      "curso": "Sistemas para Internet",
+      "instituicao": "Universidade Católica de Pernambuco (UNICAP)",
+      "periodo": "4º período",
+      "status": "Em andamento"
+    }
+  ],
+  "experiencias": [
+    {
+      "titulo": "Desenvolvimento de projetos",
+      "descricao": "Participação no desenvolvimento de projetos para a prefeitura e para a faculdade.",
+      "tipo": "Projetos"
+    }
+  ],
+  "projetos": [
+    {
+      "nome": "Voltix",
+      "descricao": "Projeto de e-commerce full-stack.",
+      "categoria": "Full-stack",
+      "tecnologias": ["JavaScript", "Node.js"]
+    },
+    {
+      "nome": "BestAttackTeamJD",
+      "descricao": "Sistema para uma academia de artes marciais, com aplicativo mobile para alunos e plataforma web para professores.",
+      "categoria": "Full-stack",
+      "tecnologias": ["JavaScript", "Node.js", "React Native"]
+    }
+  ]
+}
