@@ -1,5 +1,7 @@
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Pressable,
   StyleSheet,
   Text,
@@ -7,51 +9,62 @@ import {
   View,
 } from 'react-native';
 import PortfolioPage from '../../components/PortfolioPage';
+import { buscarCurriculo } from '../../services/api';
 
-const projects = [
-  {
-    title: 'Voltix',
-    description:
-      'Projeto de e-commerce full-stack, voltado para uma experiência de compra digital. A plataforma reúne funcionalidades de front-end e back-end.',
-    technology: 'Full-stack',
-  },
-  {
-    title: 'BestAttackTeamJD',
-    description:
-      'Sistema full-stack para uma academia de artes marciais. O aplicativo mobile é voltado para os alunos, enquanto a plataforma web atende às necessidades dos professores.',
-    technology: 'Mobile',
-  },
-];
+type Projeto = {
+  nome: string;
+  descricao: string;
+  categoria: string;
+  tecnologias: string[];
+};
 
 export default function ProjetosScreen() {
+  const [projects, setProjects] = useState<Projeto[]>([]);
   const [filter, setFilter] = useState('Todos');
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState('');
+
+  useEffect(() => {
+    buscarCurriculo()
+      .then((dados) => {
+        setProjects(dados.projetos ?? []);
+      })
+      .catch(() => {
+        setErro('Não foi possível carregar os projetos da API.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const visibleProjects = projects.filter((project) => {
     const matchesFilter =
-      filter === 'Todos' ||
-      project.technology === filter ||
-      (filter === 'Full-stack' &&
-        project.title === 'BestAttackTeamJD');
+      filter === 'Todos' || project.categoria === filter;
 
-    const matchesSearch =
-      `${project.title} ${project.description} ${project.technology}`
-        .toLowerCase()
-        .includes(search.toLowerCase());
+    const matchesSearch = [
+      project.nome,
+      project.descricao,
+      project.categoria,
+      ...project.tecnologias,
+    ]
+      .join(' ')
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
     return matchesFilter && matchesSearch;
   });
 
   return (
     <PortfolioPage
-      eyebrow="MEU TRABALHO"
+      eyebrow="Meu trabalho"
       title="Projetos"
-      description="Conheça alguns projetos que desenvolvi. Pesquise pelo nome ou filtre por categoria."
+      description="Conheça alguns projetos que desenvolvi. Pesquise pelo nome, descrição ou tecnologia e filtre por categoria."
     >
       <TextInput
         value={search}
         onChangeText={setSearch}
-        placeholder="Buscar projeto..."
+        placeholder="Buscar projeto ou tecnologia..."
         placeholderTextColor="#94A3B8"
         style={styles.search}
       />
@@ -78,13 +91,23 @@ export default function ProjetosScreen() {
         ))}
       </View>
 
-      {visibleProjects.length > 0 ? (
+      {loading ? (
+        <ActivityIndicator size="large" color="#0D9488" />
+      ) : erro ? (
+        <Text style={styles.description}>{erro}</Text>
+      ) : visibleProjects.length > 0 ? (
         visibleProjects.map((project) => (
-          <View key={project.title} style={styles.project}>
-            <Text style={styles.tag}>{project.technology}</Text>
-            <Text style={styles.projectTitle}>{project.title}</Text>
+          <View key={project.nome} style={styles.project}>
+            <Text style={styles.tag}>{project.categoria}</Text>
+
+            <Text style={styles.projectTitle}>{project.nome}</Text>
+
             <Text style={styles.description}>
-              {project.description}
+              {project.descricao}
+            </Text>
+
+            <Text style={styles.technologies}>
+              Tecnologias: {project.tecnologias.join(', ')}
             </Text>
           </View>
         ))
@@ -155,5 +178,11 @@ const styles = StyleSheet.create({
     color: '#64748B',
     fontSize: 14,
     lineHeight: 22,
+  },
+  technologies: {
+    color: '#475569',
+    fontSize: 12,
+    lineHeight: 20,
+    marginTop: 12,
   },
 });

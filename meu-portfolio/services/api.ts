@@ -1,4 +1,5 @@
-const API_URL = 'https://curly-space-orbit-x5x7rjrw6r7wc66wp-3000.app.github.dev/';
+
+const API_URL = 'http://192.168.1.5:3000';
 
 export async function buscarCurriculo() {
   const response = await fetch(`${API_URL}/api/curriculo`);

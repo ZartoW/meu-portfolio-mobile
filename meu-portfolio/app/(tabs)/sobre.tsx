@@ -1,3 +1,4 @@
+
 import PortfolioPage from '../../components/PortfolioPage';
 
 export default function SobreScreen() {
@@ -5,32 +6,29 @@ export default function SobreScreen() {
     <PortfolioPage
       eyebrow="Conheça minha trajetória"
       title="Sobre mim"
-      description="Sou estudante de Sistemas para Internet na UNICAP, no 4º período. Gosto de entender como os sistemas funcionam por trás das interfaces, especialmente APIs, regras de negócio e bancos de dados."
+      description="Sou estudante de Sistemas para Internet na UNICAP, no 4º período. Tenho interesse em desenvolvimento back-end, APIs, regras de negócio e bancos de dados, buscando também ampliar meus conhecimentos em desenvolvimento mobile e web."
       items={[
         {
-          title: '💻 Back-end',
-          description:
-            'Java, Spring Boot e Node.js.',
+          title: 'Back-end',
+          description: 'Java, Spring Boot, Node.js e desenvolvimento de APIs REST.',
         },
         {
-          title: '🗄️ Banco de dados',
-          description:
-            'SQL e desenvolvimento de soluções orientadas a dados.',
+          title: 'Banco de dados',
+          description: 'SQL e desenvolvimento de soluções orientadas a dados.',
         },
         {
-          title: '🎨 Desenvolvimento web',
-          description:
-            'React, HTML e JavaScript.',
+          title: 'Desenvolvimento web',
+          description: 'React, HTML, CSS e JavaScript.',
         },
         {
-          title: '🛠️ Tecnologias deste aplicativo',
+          title: 'Tecnologias deste aplicativo',
           description:
-            'React Native, TypeScript, Expo e Expo Router. O app também terá integração com back-end para carregar os dados do portfólio.',
+            'React Native, TypeScript, Expo e Expo Router, com integração a uma API para carregar os dados do portfólio.',
         },
         {
-          title: '✨ Funcionalidade extra',
+          title: 'Funcionalidade extra',
           description:
-            'Busca e filtros de projetos por tecnologia, facilitando a navegação pelo portfólio.',
+            'Pesquisa de projetos por nome, descrição ou tecnologia, com filtros por categoria para facilitar a navegação.',
         },
       ]}
     />
