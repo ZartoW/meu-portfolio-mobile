@@ -1,5 +1,5 @@
 
-const API_URL = 'http://192.168.1.5:3000';
+const API_URL = 'https://meu-portfolio-api-jqi1.onrender.com';
 
 export async function buscarCurriculo() {
   const response = await fetch(`${API_URL}/api/curriculo`);
